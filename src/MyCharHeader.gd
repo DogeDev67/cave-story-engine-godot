@@ -1,4 +1,4 @@
-class_name MyCharHeader extends Node #my char
+extends Node #my char
 
 enum {
     EQUIP_BOOSTER_0_8 = 1,
