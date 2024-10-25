@@ -17,6 +17,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 MyCharHeader="*res://src/MyCharHeader.gd"
+AudioManager="*res://scenes/audio_manager.tscn"
+ArmsItemHeader="*res://src/ArmsItemHeader.gd"
 
 [dotnet]
 

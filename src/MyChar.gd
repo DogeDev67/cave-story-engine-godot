@@ -1,5 +1,11 @@
 extends Node
 
+
+func func _ready():
+	#TODO: replace all mycharheader functions with mychar functions
+	MyCharHeader.InitMyChar = InitMyChar
+	MyCharHeader.animation_my_char = animation_my_char
+
 func InitMyChar() -> void:
 	MyCharHeader.gMC.cond = 0x80;
 	MyCharHeader.gMC
@@ -25,7 +31,7 @@ func animation_my_char(b_key: bool) -> void:
 	if MyCharHeader.gMC["flag"] & 8:
 		if MyCharHeader.gMC["cond"] & 1:
 			MyCharHeader.gMC["ani_no"] = 11
-		elif Input.is_action_pressed(gKeyUp) and (Input.is_action_pressed(gKeyLeft) or Input.is_action_pressed(gKeyRight)) and b_key:
+		elif Input.is_action_pressed("KEY_UP") and (Input.is_action_pressed("KEY_LEFT") or Input.is_action_pressed("KEY_RIGHT")) and b_key:
 			MyCharHeader.gMC["cond"] |= 4
 			MyCharHeader.gMC["ani_wait"] += 1
 			if MyCharHeader.gMC["ani_wait"] > 4:
@@ -36,7 +42,7 @@ func animation_my_char(b_key: bool) -> void:
 			
 			if MyCharHeader.gMC["ani_no"] > 9 or MyCharHeader.gMC["ani_no"] < 6:
 				MyCharHeader.gMC["ani_no"] = 6
-		elif (Input.is_action_pressed(gKeyLeft) or Input.is_action_pressed(gKeyRight)) and b_key:
+		elif (Input.is_action_pressed("KEY_LEFT") or Input.is_action_pressed("KEY_RIGHT")) and b_key:
 			MyCharHeader.gMC["cond"] |= 4
 			MyCharHeader.gMC["ani_wait"] += 1
 			if MyCharHeader.gMC["ani_wait"] > 4:
@@ -47,7 +53,7 @@ func animation_my_char(b_key: bool) -> void:
 			
 			if MyCharHeader.gMC["ani_no"] > 4 or MyCharHeader.gMC["ani_no"] < 1:
 				MyCharHeader.gMC["ani_no"] = 1
-		elif Input.is_action_pressed(gKeyUp) and b_key:
+		elif Input.is_action_pressed("KEY_UP") and b_key:
 			if MyCharHeader.gMC["cond"] & 4:
 				play_sound(24)
 			MyCharHeader.gMC["cond"] &= ~4
