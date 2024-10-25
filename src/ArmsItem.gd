@@ -71,22 +71,25 @@ func AddArmsData(id : float, max_ammo : float) -> bool: # according to cse2 thes
         gArmsData[i].ammo = gArmsData[i].max_ammo
     return true
 
-func SubArmsData(id : float) -> bool:
-
-    var i : int
-
-    for j in ARMS_MAX:
-        i = j # godot doesnt allow using a defined variable to iterate a for loop
+func SubArmsData(id: int) -> bool:
+    # Search for the code
+    var i = 0
+    while i < ARMS_MAX:
         if gArmsData[i].id == id:
-            break
-        return false
-    
-    for j in ARMS_MAX:
-        i = j + 1
-        gArmsData[i - 1] = gArmsData[i]
+            break  # Found
+        i += 1
 
-    gArmsData[i - 1].id = 0
-    gSelectedArms = 0
+    # If code not found, return false
+    if i == ARMS_MAX:
+        return false
+
+    # Shift all items to the left, overwriting the found item
+    for j in range(i + 1, ARMS_MAX):
+        gArmsData[j - 1] = gArmsData[j]
+
+    # Clear the last element
+    gArmsData[ARMS_MAX - 1].id = 0
+    gSelectedArms = 0  # Select the first item (index 0)
 
     return true
 
@@ -130,24 +133,25 @@ func AddItemData(id : float) -> bool:
 
     return true
 
-func SubItemData(id : float) -> bool:
 
-    #search for id
-    var i : int
-    for j in ITEM_MAX:
-        i = j
+func SubItemData(id : int) -> bool:
+    # Search for the code in gItemData
+    var i = 0
+    while i < ITEM_MAX:
         if gItemsData[i].id == id:
-            break #id found
+            break  # Found
+        i += 1
 
+    # If code not found, return false
     if i == ITEM_MAX:
         return false
 
-    #shift all items
-    for j in ITEM_MAX:
-        i = j + 1
-        gItemsData[i - 1] = gItemsData[i]
-    
-    gItemsData[i - 1].id = 0
+    # Shift items to the left, starting from the found index
+    for j in range(i + 1, ITEM_MAX):
+        gItemsData[j - 1] = gItemsData[j]
+
+    # Clear the last item and reset selected item
+    gItemsData[ITEM_MAX - 1].id = 0
     gSelectedItem = 0
 
     return true
